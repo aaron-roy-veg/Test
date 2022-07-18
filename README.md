@@ -75,14 +75,14 @@ class ConditionBase:
 | GET USER 1 MONTHLY STATS | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#MONTHLYSTATS') ``` |
 | GET USER 1 FAVORITES | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#FAVORITES') ``` |
 | LIST ARTICLES READ BY USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ARTICLE') ``` |
-| LIST ARTICLES READ BY USER 1 (ALT) | GSI2 | ``` Key('GSI').eq('USER#1') & Key('SK').begins_with('READ') ``` |
-| LIST COMMENTS BY USER 1 | GSI2 | ``` Key('GSI').eq('USER#1') & Key('SK').begins_with('COMMENT') ``` |
+| LIST ARTICLES READ BY USER 1 (ALT) | GSI2 | ``` Key('GSI2PK').eq('USER#1') & Key('SK').begins_with('READ') ``` |
+| LIST COMMENTS BY USER 1 | GSI2 | ``` Key('GSI2PK').eq('USER#1') & Key('SK').begins_with('COMMENT') ``` |
 | LIST ASSIGNED READING FOR USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ASSIGNED') ``` |
 | GET IF USER VISITED ASSIGNED READING ARTICLE 1 FOR USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#ASSIGNED#ARTICLE#1') ``` |
 | GET ARTICLES READ HISTORY | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#HISTORY') ``` |
 | UPDATE USER 1 STREAK | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('READARTICLE#{ day before's date }') ``` |
 | GET ARTICLES VISITED ON PREVIOUS DATE FOR SPECIFIC USER | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('READARTICLE#{ date }') ``` |
-| LIST READINGLIST | GSI2 | ``` Key('GSI').eq('READINGLIST') & Key('SK').begins_with('READINGLIST') ``` |
+| LIST READINGLIST | GSI2 | ``` Key('GSI2PK').eq('READINGLIST') & Key('SK').begins_with('READINGLIST') ``` |
 | GET READINGLIST 1 | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').eq('READINGLIST#1') ``` |
 | LIST ATRICLES IN READINGLIST 1 | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').begins_with('ARTICLES') ``` |
 | GET READINGLIST 1 STATS | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').eq('READINGLIST#1#STATS') ``` |
