@@ -8,7 +8,7 @@
 | Windows | [Download for Windows](https://s3.amazonaws.com/nosql-workbench/NoSQL%20Workbench-win-3.3.0.exe) |
 | Linux | [Download for Windows](https://s3.amazonaws.com/nosql-workbench/NoSQL%20Workbench-linux-x86_64-3.3.0.AppImage) |
 
-[Download demo of database workbench JSON](/files/manifesto-demo)
+[Download demo of database workbench JSON](files/manifesto-demo.json)
 ## Lambdas
 
 ### Importing boto3
