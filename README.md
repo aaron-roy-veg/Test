@@ -9,6 +9,13 @@
 | Linux | [Download for Windows](https://s3.amazonaws.com/nosql-workbench/NoSQL%20Workbench-linux-x86_64-3.3.0.AppImage) |
 
 [Download demo of database workbench JSON](files/manifesto-demo.json)
+
+### Importing the workbench model into personal NoSQL Workbench:
+![alt text](Photos/import-WB-model.png)
+Select: Import NoSQL Workbench model JSON
+
+In the Workbench Visualizer, you can see the mock database and look at the different Indices on the table
+
 ## Lambdas
 
 ### Importing boto3
@@ -20,7 +27,7 @@ from boto3.dynamodb.conditions import Key
 ### Querying with boto3 general form
 ```sh
 response = table.query(
-        IndexName = ' { INDEX NAME } ',
+        IndexName = ' { INDEX NAME } ', # Not needed if index is default
         KeyConditionExpression=Key('{ KEY NAME }').{ Attribute Base Function }(' { ITEM } ') & Key('{ KEY NAME }').{ Attribute Base Function  }(' { ITEM } ')
 )
 ```
@@ -65,14 +72,28 @@ class ConditionBase:
 | GET USER 1 INFO  | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('DEPARTMENT') ``` |
 | LIST USERS IN DEPARTMENT ENGINEERING | GSI1 | ``` Key('SK').eq('DEPARTMENT#ENGINEERING') & Key('PK').begins_with('') ``` |
 | GET USER 1 WEEKLY STATS | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#WEEKLYSTATS') ``` |
-| GET USER 1 MONTHLY STATS | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1MONTHLYSTATS') ``` |
+| GET USER 1 MONTHLY STATS | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#MONTHLYSTATS') ``` |
+| GET USER 1 FAVORITES | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#FAVORITES') ``` |
 | LIST ARTICLES READ BY USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ARTICLE') ``` |
 | LIST ARTICLES READ BY USER 1 (ALT) | GSI2 | ``` Key('GSI').eq('USER#1') & Key('SK').begins_with('READ') ``` |
 | LIST COMMENTS BY USER 1 | GSI2 | ``` Key('GSI').eq('USER#1') & Key('SK').begins_with('COMMENT') ``` |
 | LIST ASSIGNED READING FOR USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ASSIGNED') ``` |
 | GET IF USER VISITED ASSIGNED READING ARTICLE 1 FOR USER 1 | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#ASSIGNED#ARTICLE#1') ``` |
-| GET ARTICLES READ HISTORY | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ASSIGNED#ARTICLE#1') ``` |
-| UPDATE STREAK | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('USER#1#ASSIGNED#ARTICLE#1') ``` |
+| GET ARTICLES READ HISTORY | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').eq('USER#1#HISTORY') ``` |
+| UPDATE USER 1 STREAK | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('READARTICLE#{ day before's date }') ``` |
+| GET ARTICLES VISITED ON PREVIOUS DATE FOR SPECIFIC USER | DEFUALT | ``` Key('PK').eq('USER#1') & Key('SK').begins_with('READARTICLE#{ date }') ``` |
+| LIST READINGLIST | GSI2 | ``` Key('GSI').eq('READINGLIST') & Key('SK').begins_with('READINGLIST') ``` |
+| GET READINGLIST 1 | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').eq('READINGLIST#1') ``` |
+| LIST ATRICLES IN READINGLIST 1 | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').begins_with('ARTICLES') ``` |
+| GET READINGLIST 1 STATS | DEFAULT | ``` Key('PK').eq('READINGLIST#1') & Key('SK').eq('READINGLIST#1#STATS') ``` |
+| GET ARTICLES OF TAG | GSI1 | ``` Key('SK').eq('TAG#{ tag_name }') & Key('PK').eq('#1#STATS') ``` |
+
+
+
+
+
+
+
 
 
 
